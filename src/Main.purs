@@ -4,15 +4,15 @@ import Prelude
 
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log, logShow)
-import Control.Monad.Eff.JQuery (addClass, body, create, css, getCss, getPageX, getPageY, off, on, select, setAttr, append)
+import Control.Monad.Eff.JQuery (appendText, setText, setValue, addClass, body, create, css, getCss, getPageX, getPageY, off, on, select, setAttr, append)
 import Control.Monad.Eff.Timer (TIMER, setTimeout)
 import Control.Monad.ST (ST, STRef, newSTRef, readSTRef, writeSTRef)
 import DOM (DOM)
 import DOM.HTML (window)
+import DOM.HTML.HTMLAnchorElement (text)
 import DOM.HTML.Window (requestAnimationFrame)
-import Data.Array.Partial (tail)
-import Partial.Unsafe (unsafePartial)
 import Data.Array (index, length, updateAt, zipWith, replicate, snoc)
+import Data.Array.Partial (tail)
 import Data.Foldable (foldl)
 import Data.Int (toNumber)
 import Data.Maybe (fromMaybe)
@@ -21,6 +21,7 @@ import Data.String (Pattern(..), contains, split, stripPrefix, stripSuffix)
 import LinearAlgebra.Matrix (Matrix, column, element, fromArray, identity, rows)
 import LinearAlgebra.Matrix (multiply) as M
 import Math (abs, atan, cos, pi, sin, sqrt)
+import Partial.Unsafe (unsafePartial)
 
 
 
@@ -122,6 +123,7 @@ drawCube = do
   frontFace <- create "<figure>"
   setAttr "id" "front_face" frontFace
   addClass "face" frontFace
+  setText "cube" frontFace
 
   backFace <- create "<figure>"
   setAttr "id" "back_face" backFace

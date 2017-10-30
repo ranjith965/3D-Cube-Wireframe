@@ -406,6 +406,14 @@ var PS = {};
       return jQuery(document.body);
   };
 
+  exports.setText = function(text) {
+      return function(ob) {
+          return function() {
+              ob.text(text);
+          };
+      };
+  };
+
   exports.on = function(evt) {
       return function(act) {
           return function(ob) {
@@ -579,6 +587,7 @@ var PS = {};
   exports["on"] = $foreign.on;
   exports["select"] = $foreign.select;
   exports["setAttr"] = $foreign.setAttr;
+  exports["setText"] = $foreign.setText;
 })(PS["Control.Monad.Eff.JQuery"] = PS["Control.Monad.Eff.JQuery"] || {});
 (function(exports) {
   /* global exports */
@@ -1451,6 +1460,7 @@ var PS = {};
   var Control_Monad_ST = PS["Control.Monad.ST"];
   var DOM = PS["DOM"];
   var DOM_HTML = PS["DOM.HTML"];
+  var DOM_HTML_HTMLAnchorElement = PS["DOM.HTML.HTMLAnchorElement"];
   var DOM_HTML_Window = PS["DOM.HTML.Window"];
   var Data_Array = PS["Data.Array"];
   var Data_Array_Partial = PS["Data.Array.Partial"];
@@ -1516,7 +1526,7 @@ var PS = {};
       if (Data_Boolean.otherwise) {
           return noTransformation;
       };
-      throw new Error("Failed pattern match at Main line 41, column 1 - line 41, column 51: " + [ a.constructor.name ]);
+      throw new Error("Failed pattern match at Main line 42, column 1 - line 42, column 51: " + [ a.constructor.name ]);
   };
   var toTransformMatrix = function (str) {
       if (Data_String.contains("matrix3d(")(str)) {
@@ -1534,7 +1544,7 @@ var PS = {};
       if (Data_Boolean.otherwise) {
           return noTransformation;
       };
-      throw new Error("Failed pattern match at Main line 69, column 1 - line 69, column 47: " + [ str.constructor.name ]);
+      throw new Error("Failed pattern match at Main line 70, column 1 - line 70, column 47: " + [ str.constructor.name ]);
   };
   var noRotation = Data_Maybe.fromMaybe(LinearAlgebra_Matrix.identity(1))(LinearAlgebra_Matrix.fromArray(4)(1)([ 0.0, 0.0, 0.0, 0.0 ]));
   var rotationVector = function (a) {
@@ -1544,7 +1554,7 @@ var PS = {};
       if (Data_Boolean.otherwise) {
           return noRotation;
       };
-      throw new Error("Failed pattern match at Main line 29, column 1 - line 29, column 49: " + [ a.constructor.name ]);
+      throw new Error("Failed pattern match at Main line 30, column 1 - line 30, column 49: " + [ a.constructor.name ]);
   };
   var sum = function (vs) {
       var add = function (v) {
@@ -1637,6 +1647,7 @@ var PS = {};
       var v = Control_Monad_Eff_JQuery.create("<figure>")();
       Control_Monad_Eff_JQuery.setAttr("id")("front_face")(v)();
       Control_Monad_Eff_JQuery.addClass("face")(v)();
+      Control_Monad_Eff_JQuery.setText("cube")(v)();
       var v1 = Control_Monad_Eff_JQuery.create("<figure>")();
       Control_Monad_Eff_JQuery.setAttr("id")("back_face")(v1)();
       Control_Monad_Eff_JQuery.addClass("face")(v1)();
